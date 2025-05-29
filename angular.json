@@ -7,12 +7,18 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-dynamic-forms": {
+    "forms-designers": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss",
-          "changeDetection": "OnPush"
+          "changeDetection": "OnPush",
+          "inlineStyle": true,
+          "inlineTemplate": true,
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
         }
       },
       "root": "",
@@ -22,7 +28,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/ngx-dynamic-forms",
+            "outputPath": "dist/forms-designers",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [],
@@ -68,10 +74,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "ngx-dynamic-forms:build:production"
+              "buildTarget": "forms-designers:build:production"
             },
             "development": {
-              "buildTarget": "ngx-dynamic-forms:build:development"
+              "buildTarget": "forms-designers:build:development"
             }
           },
           "defaultConfiguration": "development"
