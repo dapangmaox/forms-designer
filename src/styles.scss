@@ -9,3 +9,16 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.cdk-drop-list-dragging:not(.elements-menu) {
+  border: 2px solid lightgray !important;
+  background-color: lightgray !important;
+}
+
+.mdc-notched-outline__notch {
+  border-style: none;
+}
+
+.mat-mdc-icon-button {
+  line-height: normal;
+}

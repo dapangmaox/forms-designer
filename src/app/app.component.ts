@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormElementsMenuComponent } from './components/form-elements-menu/form-elements-menu.component';
 import { MainCanvasComponent } from './components/main-canvas/main-canvas.component';
 import { FieldSettingsComponent } from './components/field-settings/field-settings.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,7 @@ import { FieldSettingsComponent } from './components/field-settings/field-settin
     FormElementsMenuComponent,
     MainCanvasComponent,
     FieldSettingsComponent,
+    DragDropModule,
   ],
   template: `
     <div class="flex flex-col h-screen bg-gray-100 px-4">
@@ -21,7 +23,7 @@ import { FieldSettingsComponent } from './components/field-settings/field-settin
           TailwindCSS
         </p>
       </div>
-      <div class="flex gap-4">
+      <div class="flex gap-4" cdkDropListGroup>
         <app-form-elements-menu class="w-64" />
         <app-main-canvas class="flex-1" />
         <app-field-settings class="w-64 " />
