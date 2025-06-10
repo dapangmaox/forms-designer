@@ -15,6 +15,7 @@ import { FormFieldComponent } from '../form-field/form-field.component';
       @for (row of formService.rows(); track row.id) {
         <div
           cdkDropList
+          [cdkDropListData]="row.id"
           (cdkDropListDropped)="onDropInRow($event, row.id)"
           [cdkDropListOrientation]="'mixed'"
           class="p-5 mb-4 bg-white rounded-lg border-2 border-dashed border-gray-200"
@@ -27,7 +28,18 @@ import { FormFieldComponent } from '../form-field/form-field.component';
           </div>
           <div class="flex gap-4 flex-wrap">
             @for (field of row.fields; track field.id) {
-              <app-form-field class="flex-1" [field]="field" />
+              <app-form-field
+                cdkDrag
+                [cdkDragData]="field"
+                class="flex-1"
+                [field]="field"
+              />
+            } @empty {
+              <div
+                class="bg-background w-full p-4 border border-dashed border-primary-container rounded text-center text-gray-400"
+              >
+                Drag and drop from elements here
+              </div>
             }
           </div>
         </div>
@@ -53,5 +65,15 @@ export class FormEditorComponent {
       this.formService.addField(newField, rowId, event.currentIndex);
       return;
     }
+
+    const dragData = event.item.data as FormField;
+    const previousRowId = event.previousContainer.data as string;
+
+    this.formService.moveField(
+      dragData.id,
+      previousRowId,
+      rowId,
+      event.currentIndex,
+    );
   }
 }
