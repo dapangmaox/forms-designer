@@ -1,21 +1,25 @@
+import { TitleCasePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   inject,
   input,
 } from '@angular/core';
-import { NgComponentOutlet, TitleCasePipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 import { FormField } from '../../../models/field';
-import { FieldTypesService } from '../../../services/field-types.service';
 import { FormService } from '../../../services/form.service';
+import { FieldPreviewComponent } from '../field-preview/field-preview.component';
 
 @Component({
   selector: 'app-form-field',
-  imports: [NgComponentOutlet, TitleCasePipe, MatButtonModule, MatIconModule],
+  imports: [
+    TitleCasePipe,
+    MatButtonModule,
+    MatIconModule,
+    FieldPreviewComponent,
+  ],
   template: `
     <div
       class="bg-white p-4 pt-1 rounded-lg shadow-sm border border-gray-200 hover:border-black cursor-pointer"
@@ -26,10 +30,7 @@ import { FormService } from '../../../services/form.service';
           <mat-icon class="mr-2">delete</mat-icon>
         </button>
       </div>
-      <ng-container
-        [ngComponentOutlet]="previewComponent()"
-        [ngComponentOutletInputs]="{ field: field() }"
-      ></ng-container>
+      <app-field-preview [field]="field()" />
     </div>
   `,
   styles: ``,
@@ -38,13 +39,7 @@ import { FormService } from '../../../services/form.service';
 export class FormFieldComponent {
   field = input.required<FormField>();
 
-  fieldTypesService = inject(FieldTypesService);
   formService = inject(FormService);
-
-  previewComponent = computed(() => {
-    const type = this.fieldTypesService.getFieldType(this.field().type);
-    return type?.component || null;
-  });
 
   deleteField(e: Event) {
     e.stopPropagation();
