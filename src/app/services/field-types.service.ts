@@ -11,6 +11,34 @@ const TEXT_FIELD_DEFINITION: FieldTypeDefinition = {
     label: 'Text Field',
     required: false,
   },
+  settingsConfig: [
+    {
+      type: 'text',
+      key: 'label',
+      label: 'Label',
+    },
+    {
+      type: 'text',
+      key: 'placeholder',
+      label: 'Placeholder',
+    },
+    {
+      type: 'checkbox',
+      key: 'required',
+      label: 'Required',
+    },
+    {
+      type: 'select',
+      key: 'inputType',
+      label: 'Input Type',
+      options: [
+        { label: 'Text', value: 'text' },
+        { label: 'Number', value: 'number' },
+        { label: 'Email', value: 'email' },
+        { label: 'Phone', value: 'tel' },
+      ],
+    },
+  ],
   component: TextFieldComponent,
 };
 
@@ -22,6 +50,10 @@ const CHECKBOX_FIELD_DEFINITION: FieldTypeDefinition = {
     label: 'Checkbox',
     required: false,
   },
+  settingsConfig: [
+    { type: 'text', key: 'label', label: 'Label' },
+    { type: 'checkbox', key: 'required', label: 'Required' },
+  ],
   component: CheckboxFieldComponent,
 };
 

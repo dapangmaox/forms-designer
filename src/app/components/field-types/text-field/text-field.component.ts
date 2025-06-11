@@ -13,6 +13,7 @@ import { FormField } from '../../../models/field';
         matInput
         [type]="field().inputType || 'text'"
         [required]="field().required"
+        [placeholder]="field().placeholder || ''"
       />
     </mat-form-field>
   `,

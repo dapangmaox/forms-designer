@@ -5,7 +5,20 @@ export interface FieldTypeDefinition {
   label: string;
   icon: string;
   defaultConfig: any;
+  settingsConfig: FieldSettingsDefinition[];
   component: Type<unknown>;
+}
+
+export interface FieldSettingsDefinition {
+  type: 'text' | 'checkbox' | 'select';
+  key: string;
+  label: string;
+  options?: OptionItem[];
+}
+
+export interface OptionItem {
+  label: string;
+  value: string;
 }
 
 export interface FormField {
@@ -14,4 +27,5 @@ export interface FormField {
   label: string;
   required: boolean;
   inputType?: string; // Optional, for fields like text input
+  placeholder?: string; // Optional, for fields like text input
 }
