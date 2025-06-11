@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CdkDrag, DragDropModule } from '@angular/cdk/drag-drop';
 
 import { FieldTypesService } from '../../services/field-types.service';
 import { FieldButtonComponent } from './field-button/field-button.component';
@@ -17,6 +17,7 @@ import { FieldButtonComponent } from './field-button/field-button.component';
         cdkDropList
         cdkDropListSortingDisabled="true"
         [cdkDropListData]="'field-selector'"
+        [cdkDropListEnterPredicate]="noDropAllowed"
       >
         @for (type of fieldTypes; track type.type) {
           <app-field-button [field]="type" />
@@ -31,4 +32,9 @@ export class FormElementsMenuComponent {
   fieldTypesService = inject(FieldTypesService);
 
   fieldTypes = this.fieldTypesService.getAllFieldTypes();
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  noDropAllowed(_item: CdkDrag<any>) {
+    return false;
+  }
 }
