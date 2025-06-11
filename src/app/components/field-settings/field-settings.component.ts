@@ -10,8 +10,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
+
 import { FormService } from '../../services/form.service';
 import { FieldTypesService } from '../../services/field-types.service';
+import { DynamicOptionsComponent } from './dynamic-options/dynamic-options.component';
 
 @Component({
   selector: 'app-field-settings',
@@ -22,6 +24,7 @@ import { FieldTypesService } from '../../services/field-types.service';
     MatSelectModule,
     MatCheckboxModule,
     FormsModule,
+    DynamicOptionsComponent,
   ],
   template: `
     <div
@@ -72,6 +75,15 @@ import { FieldTypesService } from '../../services/field-types.service';
                     }
                   </mat-select>
                 </mat-form-field>
+              }
+              @case ('dynamic-options') {
+                <app-dynamic-options
+                  [title]="setting.label"
+                  [options]="fieldValues()[setting.key]"
+                  (optionsChange)="
+                    updateField(selectedField.id, setting.key, $event)
+                  "
+                />
               }
             }
           }
